@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 22, 2022 at 10:14 AM
--- Server version: 10.4.19-MariaDB
--- PHP Version: 8.0.7
+-- Generation Time: May 04, 2023 at 11:14 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.0.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -35,7 +35,7 @@ CREATE TABLE `category_list` (
   `delete_flag` tinyint(1) NOT NULL DEFAULT 0,
   `date_created` datetime NOT NULL DEFAULT current_timestamp(),
   `date_updated` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `category_list`
@@ -61,7 +61,7 @@ CREATE TABLE `product_list` (
   `delete_flag` tinyint(1) NOT NULL DEFAULT 0,
   `date_created` datetime NOT NULL DEFAULT current_timestamp(),
   `date_updated` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `product_list`
@@ -97,7 +97,7 @@ CREATE TABLE `sale_list` (
   `payment_code` text DEFAULT NULL,
   `date_created` datetime NOT NULL DEFAULT current_timestamp(),
   `date_updated` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `sale_list`
@@ -105,7 +105,10 @@ CREATE TABLE `sale_list` (
 
 INSERT INTO `sale_list` (`id`, `user_id`, `code`, `client_name`, `amount`, `tendered`, `payment_type`, `payment_code`, `date_created`, `date_updated`) VALUES
 (1, 1, '202204220001', 'Guest', 710.00, 1000.00, 1, '', '2022-04-22 13:54:44', '2022-04-22 13:54:44'),
-(2, 2, '202204220002', 'Guest', 675.00, 700.00, 2, '123121ABcdF', '2022-04-22 15:27:02', '2022-04-22 15:27:02');
+(2, NULL, '202204220002', 'Guest', 675.00, 700.00, 2, '123121ABcdF', '2022-04-22 15:27:02', '2022-04-22 15:27:02'),
+(3, 1, '202305050001', 'Guest', 140.00, 50.00, 1, '', '2023-05-04 16:40:43', '2023-05-04 16:40:43'),
+(4, 1, '202305050002', 'Guest', 245.00, 400.00, 1, '', '2023-05-04 16:45:01', '2023-05-04 16:45:01'),
+(5, 5, '202305050003', 'Guest', 295.00, 150.00, 1, '', '2023-05-04 16:56:42', '2023-05-04 16:56:42');
 
 -- --------------------------------------------------------
 
@@ -118,7 +121,7 @@ CREATE TABLE `sale_products` (
   `product_id` int(30) NOT NULL,
   `qty` int(10) NOT NULL,
   `price` float(15,2) NOT NULL DEFAULT 0.00
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `sale_products`
@@ -129,7 +132,12 @@ INSERT INTO `sale_products` (`sale_id`, `product_id`, `qty`, `price`) VALUES
 (1, 10, 2, 145.00),
 (2, 9, 1, 150.00),
 (2, 3, 3, 75.00),
-(2, 8, 2, 150.00);
+(2, 8, 2, 150.00),
+(3, 11, 1, 140.00),
+(4, 10, 1, 145.00),
+(4, 4, 1, 100.00),
+(5, 9, 1, 150.00),
+(5, 10, 1, 145.00);
 
 -- --------------------------------------------------------
 
@@ -141,15 +149,15 @@ CREATE TABLE `system_info` (
   `id` int(30) NOT NULL,
   `meta_field` text NOT NULL,
   `meta_value` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `system_info`
 --
 
 INSERT INTO `system_info` (`id`, `meta_field`, `meta_value`) VALUES
-(1, 'name', 'Coffee Shop Cashiering System'),
-(6, 'short_name', 'CSCS - PHP'),
+(1, 'name', 'Towson University Ignite'),
+(6, 'short_name', 'TU-IGNITE'),
 (11, 'logo', 'uploads/logo.png?v=1650590302'),
 (13, 'user_avatar', 'uploads/user_avatar.jpg'),
 (14, 'cover', 'uploads/cover.png?v=1650590309');
@@ -171,16 +179,17 @@ CREATE TABLE `users` (
   `type` tinyint(1) NOT NULL DEFAULT 0,
   `date_added` datetime NOT NULL DEFAULT current_timestamp(),
   `date_updated` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `username`, `password`, `avatar`, `last_login`, `type`, `date_added`, `date_updated`) VALUES
-(1, 'Adminstrator', 'Admin', 'admin', '0192023a7bbd73250516f069df18b500', 'uploads/avatars/1.png?v=1649834664', NULL, 1, '2021-01-20 14:02:37', '2022-04-13 15:24:24'),
-(2, 'Mark', 'Cooper', 'mcooper', '0c4635c5af0f173c26b0d85b6c9b398b', 'uploads/avatars/2.png?v=1650520142', NULL, 3, '2022-04-21 13:49:02', '2022-04-21 13:49:54'),
-(4, 'Johnny', 'Smith', 'jsmith', '1254737c076cf867dc53d60a0364f38e', 'uploads/avatars/4.png?v=1650531008', NULL, 3, '2022-04-21 16:50:08', '2022-04-21 16:50:08');
+(1, 'Adminstrator', 'Admin', 'admin', '0192023a7bbd73250516f069df18b500', 'uploads/avatars/1.png?v=1683232811', NULL, 1, '2021-01-20 14:02:37', '2023-05-04 16:40:11'),
+(5, 'Cashier ', 'Test', 'Cashier', 'dbb8c54ee649f8af049357a5f99cede6', 'uploads/avatars/5.png?v=1683232616', NULL, 3, '2023-05-04 16:36:55', '2023-05-04 16:36:56'),
+(6, 'Staff', 'Test', 'Staff', 'de9bf5643eabf80f4a56fda3bbb84483', 'uploads/avatars/6.png?v=1683232721', NULL, 2, '2023-05-04 16:38:41', '2023-05-04 16:38:41'),
+(7, 'Admin', 'Test', 'Admin', '0192023a7bbd73250516f069df18b500', 'uploads/avatars/7.png?v=1683232790', NULL, 1, '2023-05-04 16:39:50', '2023-05-04 16:39:50');
 
 --
 -- Indexes for dumped tables
@@ -245,7 +254,7 @@ ALTER TABLE `product_list`
 -- AUTO_INCREMENT for table `sale_list`
 --
 ALTER TABLE `sale_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `system_info`
@@ -257,7 +266,7 @@ ALTER TABLE `system_info`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
