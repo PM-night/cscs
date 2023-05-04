@@ -1,0 +1,25 @@
+
+# The project was developed using the following 
+**XAMPP – (https://www.apachefriends.org/download.html) *JavaScript *Ajax *jQuery **Bootstrap *Font Awesome *AdminLTE *PHP *MySQL database *HTML *CSS
+##How to get TU IGNITE RUNNING##
+#Download and Install XAMPP (https://www.apachefriends.org/download.html)
+#Download GitHub Desktop (https://desktop.github.com/)
+#Download and Install GIT 2.4. (https://git-scm.com/downloads) 
+# Enable the GD library in the Xampp PHP folder: This is done by going directly to the Xampp (Folder)/ETC(Folder)/php.ini (File). 
+Open the php.ini file with visual studio code or notepad++ etc... 
+Once it’s open click cmd+f and type GD. It will lead you to the enable GD line, the main objective is to clear the ";" in front of that line of code and save the file. 
+#Open GitHub Desktop and Clone the repository (https://github.com/PM-night/cscs.git) directly to Xampp/htdocs
+# Open the Xampp control panel and start Apache and MySQL.
+#Copy and paste (http://localhost/myphpadmin) into web browser 
+#Create New Database name cscs-db. (On the left side click on the new tab enter the database name "cscs_db" with type "utf8mb4_general_ci". 
+Import the provided SQL file in the CSCS database folder called cscs_db.sql)
+#On your web browser copy and paste (http://localhost/cscs) 
+TU IGNITE ACCESS 
+Username -- AdminTest               Password – AD123 -- Log in to get admin/manager functions.
+Username – StaffTest                Password – ST123 – Staff function’s
+Username – CashierTest              Password – CT123 – Cashier Functions 
+		
+	UPLOAD GUIDES 
+	Avatars – PNG files only
+	Banners – JPG files only
+	Cover & Logo – PNG files only 
